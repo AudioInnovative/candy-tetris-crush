@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> All Fall Down</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+      @media (max-width:700px), (pointer: coarse) {
+        /* Rules removed and moved to style.css */
+      }
+    </style>
+</head>
+<body>
+    <div id="start-screen" class="start-overlay">
+        <img src="All Fall Down Logo.png" alt="All Fall Down Logo" class="start-logo" />
+        <div class="start-subtitle">A Gravity Puzzle Game</div>
+        <button id="start-btn" class="start-btn">Start Game</button>
+    </div>
+    <div class="title-glow"><h1>All Fall Down</h1></div>
+</body>
+    <div id="game-container">
+        <div id="main-content">
+            <div id="sidebar">
+    <div class="sidebar-section" id="next-piece-section">
+        <div class="next-label">Next Piece</div>
+        <canvas id="next-piece-canvas" width="80" height="80"></canvas>
+    </div>
+    <div class="sidebar-section" id="score-section">
+        <div id="score">Score: 0</div>
+    </div>
+    <div class="sidebar-section" id="level-section">
+        <div id="level">Level: 1</div>
+    </div>
+    <div class="sidebar-section" id="pause-section">
+        <button id="pause-btn" class="pause-btn">Pause</button>
+    </div>
+    <div class="sidebar-section" id="restart-section">
+        <button id="restart-btn">Restart</button>
+    </div>
+</div>
+            <canvas id="game-board"></canvas>
+        </div>
+    </div>
+    <div id="touch-controls">
+        <button id="btn-left" aria-label="Move Left">&#8592;</button>
+        <button id="btn-right" aria-label="Move Right">&#8594;</button>
+        <button id="btn-rotate" aria-label="Rotate">&#8635;</button>
+        <button id="btn-down" aria-label="Soft Drop">&#8595;</button>
+        <button id="btn-drop" aria-label="Hard Drop">&#11015;</button>
+        <button id="btn-touch-pause" aria-label="Pause/Resume">&#10074;&#10074;</button>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html>

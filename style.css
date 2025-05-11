@@ -1,0 +1,518 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+
+/* --- Global Box Sizing --- */
+html {
+    box-sizing: border-box; /* Set base box-sizing */
+}
+*, *:before, *:after { /* Inherit box-sizing for all elements */
+    box-sizing: inherit;
+}
+/* --- End Global Box Sizing --- */
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+/* --- Start Screen Overlay Styles --- */
+.start-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(10, 16, 24, 0.95);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: opacity 0.6s cubic-bezier(.4,0,.2,1);
+    opacity: 1;
+}
+.start-overlay.fade-out {
+    opacity: 0;
+    pointer-events: none;
+}
+.start-logo {
+    width: 340px;
+    max-width: 80vw;
+    margin-bottom: 32px;
+    border-radius: 18px;
+    box-shadow: 0 0 32px #00bfff88, 0 0 16px #39ff14aa;
+}
+.start-subtitle {
+    color: #00bfff;
+    font-family: 'Fredoka One', 'Segoe UI', Arial, sans-serif;
+    font-size: 1.5rem;
+    margin-bottom: 36px;
+    letter-spacing: 2px;
+    text-shadow: 0 0 12px #00bfff, 0 0 4px #39ff14;
+}
+.start-btn {
+    font-family: 'Fredoka One', 'Segoe UI', Arial, sans-serif;
+    font-size: 1.3rem;
+    color: #fff;
+    background: linear-gradient(90deg, #00bfff 0%, #39ff14 100%);
+    border: none;
+    border-radius: 12px;
+    padding: 16px 48px;
+    box-shadow: 0 0 18px #00bfff88, 0 0 8px #39ff1488;
+    cursor: pointer;
+    letter-spacing: 2px;
+    transition: background 0.2s, box-shadow 0.2s, transform 0.12s;
+}
+.start-btn:hover, .start-btn:focus {
+    background: linear-gradient(90deg, #39ff14 0%, #00bfff 100%);
+    box-shadow: 0 0 32px #00bfffcc, 0 0 16px #39ff14cc;
+    transform: scale(1.05);
+}
+/* --- End Start Screen Overlay Styles --- */
+
+body {
+    font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
+    background: #181c20;
+    color: #e0e0e0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+#game-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    
+    border-radius: 18px;
+
+    padding: 8px 40px 8px 40px;
+    overflow: hidden;
+    width: auto;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+@media (max-width: 800px), (pointer: coarse) {
+  #game-container {
+    width: 98vw;
+    height: auto;
+    min-height: 0;
+    max-width: 100vw;
+    padding: 0;
+  }
+}
+
+#main-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    width: auto;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+@media (max-width: 700px), (pointer: coarse) {
+  #game-container {
+    flex-direction: column;
+    padding: 0;
+    width: 100vw;
+    max-width: 100vw;
+  }
+  #main-content {
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+  }
+}
+
+#main-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 32px;
+    width: 100%;
+    flex-grow: 1;
+    overflow-y: visible;
+}
+
+@media (max-width: 700px), (pointer: coarse) {
+  #main-content {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    min-height: 0;
+  }
+}
+
+#sidebar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 180px;
+    max-width: 240px;
+    flex-shrink: 0;
+    margin-right: 12px;
+}
+
+.sidebar-section {
+    margin-bottom: 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#sidebar .sidebar-section:last-child {
+    margin-bottom: 0;
+}
+
+@media (max-width: 700px), (pointer: coarse) {
+  #sidebar {
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+    margin-bottom: 12px;
+    order: -1;
+    flex-wrap: wrap;
+    min-width: unset;
+    max-width: unset;
+    margin-right: 0;
+  }
+  #sidebar > * {
+    margin: 4px 2px;
+    flex: 1 1 45%;
+    text-align: center;
+  }
+}
+
+#next-piece-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.next-label {
+    color: #00bfff;
+    font-family: 'Fredoka One', 'Segoe UI', Arial, sans-serif;
+    font-size: 1.1rem;
+    text-shadow: 0 0 8px #00bfff, 0 0 4px #39ff14;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+}
+
+#next-piece-canvas {
+    background: #181c20;
+    border: 2.5px solid #00bfff;
+    border-radius: 10px;
+    box-shadow: 0 0 12px #00bfff88, 0 0 6px #39ff1488;
+    display: block;
+    margin-bottom: 8px;
+    width: 110px !important;
+    height: 110px !important;
+    max-width: 110px;
+    max-height: 110px;
+}
+
+#level {
+    font-size: 1.2rem;
+    margin: 8px 0 16px 0;
+    padding: 6px 18px;
+    color: #00bfff;
+    background: #181c20;
+    border-radius: 8px;
+    box-shadow: 0 0 8px #00bfff77;
+    font-weight: bold;
+    text-align: center;
+    letter-spacing: 1px;
+    border: 2px solid #00bfff;
+}
+
+#game-board {
+    aspect-ratio: 10 / 20;
+    width: 100%;
+    height: auto;
+    max-height: 70vh;
+    max-width: 350px;
+    display: block;
+    border: 4px solid #ffb347;
+    background: #fffbe7;
+    border-radius: 12px;
+    margin: 0;
+    box-shadow: 0 4px 16px rgba(255, 179, 71, 0.2);
+    box-sizing: border-box;
+}
+
+#score {
+    font-size: 1rem;
+    margin: 8px 0 16px 0;
+    padding: 6px 18px;
+    color: #00bfff;
+    background: #181c20;
+    border-radius: 8px;
+    box-shadow: 0 0 8px #00bfff77;
+    font-weight: bold;
+    word-break: break-word;
+    text-align: center;
+    letter-spacing: 1px;
+    border: 2px solid #00bfff;
+}
+
+#pause-btn {
+    background: #ff00cc;
+    color: #fff;
+    border: 2px solid #ff00cc;
+    border-radius: 8px;
+    padding: 10px 28px;
+    font-size: 1.1rem;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 0 12px #ff00cc88;
+    transition: background 0.2s, color 0.2s, transform 0.1s;
+    margin: 10px 0 0 0;
+    letter-spacing: 1px;
+    width: 110px;
+    min-width: 110px;
+    max-width: 110px;
+    text-align: center;
+}
+#pause-btn:hover {
+    background: #fff;
+    color: #ff00cc;
+}
+
+#restart-btn {
+    background: #181c20;
+    color: #00bfff;
+    border: 2px solid #00bfff;
+    border-radius: 8px;
+    padding: 10px 28px;
+    font-size: 1.1rem;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 0 12px #00bfff44;
+    transition: background 0.2s, color 0.2s, transform 0.1s;
+    margin: 18px 0 0 0;
+}
+
+#restart-btn:hover {
+    background: #00bfff;
+    color: #181c20;
+    transform: scale(1.06);
+}
+
+#restart-btn:hover {
+    background: #ff6f61;
+}
+
+#touch-controls {
+    display: none;
+    flex-shrink: 0;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background: rgba(10,16,24,0.93);
+    padding: 8px 0;
+    z-index: 1001;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    box-sizing: border-box;
+}
+
+/* --- Responsive Layout for Mobile --- */
+@media (max-width: 700px), (pointer: coarse) {
+    html {
+        height: 100%;
+        overflow: hidden;
+    }
+    body {
+        display: block;
+        height: 100%;
+        overflow: hidden;
+        padding: 0;
+        margin: 0;
+    }
+    #game-container {
+        position: relative; 
+        height: 100%; 
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        
+        overflow-y: auto;   /* This is the scroller */
+        border-radius: 0;
+        border: none;
+        padding: 0; /* All side/top padding removed from here */
+        padding-bottom: calc((18vw + 16px) + 8px); /* touch_controls_height + 8px buffer */
+        box-sizing: border-box;
+        max-width: 100%;
+    }
+    #main-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        width: 100%;
+        padding: 8px; /* Padding for content within main-content, inside scrollable game-container */
+        box-sizing: border-box;
+        min-height: 0; /* Helps flex item shrink correctly within scrolling parent */
+    }
+    #sidebar {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        width: 100%;
+        margin-bottom: 12px;
+        order: -1;
+        flex-wrap: wrap;
+    }
+    #sidebar > * {
+        margin: 4px 2px;
+        flex: 1 1 45%;
+        text-align: center;
+    }
+    .next-label-container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 8px;
+    }
+    #next-piece-canvas {
+        max-width: 25vw; 
+        width: 100%; 
+        height: auto; 
+        aspect-ratio: 1 / 1; 
+        margin-top: 4px;
+        background: #0005;
+        border-radius: 8px;
+        box-shadow: inset 0 0 8px #000c;
+    }
+    .title-glow {
+        position: static;
+        transform: none;
+        width: 100%;
+        text-align: center;
+        margin-bottom: 10px;
+        padding: 5px 0;
+        border: none;
+        box-shadow: none;
+        order: -2;
+    }
+    .title-glow h1 {
+        font-size: 8vw !important;
+    }
+    #game-board {
+        display: block; 
+        max-width: 90vw;   
+        width: 100%;       
+        height: auto; /* Works with aspect-ratio to set height based on width */
+        aspect-ratio: 10 / 20; /* Maintain 1:2 aspect ratio for 10x20 grid */
+        max-height: 45vh !important;  /* Constrain the board's height on mobile */
+        box-sizing: border-box;
+        order: 0;
+        border: 2px solid #233240; 
+        box-shadow: 0 0 10px #00bfff44, inset 0 0 10px #000000aa;
+    }
+    .next-label, #score, #level {
+        font-size: 4.5vw;
+    }
+    #pause-btn, #restart-btn {
+        padding: 10px 0;
+        font-size: 4.5vw;
+    }
+    #touch-controls {
+        display: flex !important; /* Ensure visible */
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        background: rgba(10,16,24,0.93);
+        padding: 8px 0; /* Vertical padding for items inside controls */
+        z-index: 1001;
+        justify-content: center;
+        align-items: center;
+        gap: 6px;
+        box-sizing: border-box;
+        height: calc(18vw + 16px); /* Explicit height: button_height + its_own_padding */
+    }
+    #touch-controls button {
+        width: 18vw !important;
+        height: 18vw !important; 
+        font-size: 5vw !important;
+    }
+}
+
+.title-glow {
+    position: absolute;
+    top: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: fit-content;
+    min-width: unset;
+    max-width: 80vw;
+    font-size: 2.2rem;
+    padding: 2px 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 200;
+    pointer-events: none;
+    height: auto;
+    box-sizing: border-box;
+    border: 3px solid #00f0ff;
+    border-radius: 18px;
+    box-shadow: 0 0 18px 3px #00f0ff99, 0 0 28px 6px #00f0ff44;
+}
+
+#game-container {
+    margin-top: 80px;
+}
+
+
+.title-glow h1 {
+    font-family: 'Fredoka One', 'Segoe UI', Arial, sans-serif;
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: #00bfff;
+    background: linear-gradient(90deg, #00bfff 0%, #39ff14 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+    margin: 0 auto;
+    text-align: center;
+    letter-spacing: 2.5px;
+    text-shadow: 0 0 16px #00bfff, 0 0 8px #39ff14;
+    transition: all 0.2s;
+    pointer-events: auto;
+}
+
+h1 {
+    all: unset;
+}
+
+/* --- Desktop Fullscreen Layout --- */
+@media (min-width: 701px) {
+    html, body {
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+    }
+    #game-container {
+        height: 100%;
+        overflow: hidden;
+    }
+}
