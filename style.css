@@ -83,9 +83,8 @@ body {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    
     border-radius: 18px;
-
+    /* box-shadow removed */
     padding: 8px 40px 8px 40px;
     overflow: hidden;
     width: auto;
@@ -245,9 +244,15 @@ body {
     background: #fffbe7;
     border-radius: 12px;
     margin: 0;
-    box-shadow: 0 4px 16px rgba(255, 179, 71, 0.2);
+    /* No static box-shadow here; use .board-glow for dynamic glow */
     box-sizing: border-box;
 }
+
+.board-glow {
+    box-shadow: 0 0 24px 6px var(--board-glow-color, #ffb34788), 0 0 12px 2px var(--board-glow-color, #ffb34755);
+    transition: box-shadow 0.2s;
+}
+
 
 #score {
     font-size: 1rem;
@@ -474,7 +479,7 @@ body {
     box-sizing: border-box;
     border: 3px solid #00f0ff;
     border-radius: 18px;
-    box-shadow: 0 0 18px 3px #00f0ff99, 0 0 28px 6px #00f0ff44;
+    /* box-shadow removed */
 }
 
 #game-container {
@@ -484,10 +489,9 @@ body {
 
 .title-glow h1 {
     font-family: 'Fredoka One', 'Segoe UI', Arial, sans-serif;
-    font-size: 2.2rem;
+    font-size: 2.7rem;
     font-weight: bold;
-    color: #00bfff;
-    background: linear-gradient(90deg, #00bfff 0%, #39ff14 100%);
+    background: linear-gradient(90deg, #00f0ff 0%, #39ff14 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -495,7 +499,7 @@ body {
     margin: 0 auto;
     text-align: center;
     letter-spacing: 2.5px;
-    text-shadow: 0 0 16px #00bfff, 0 0 8px #39ff14;
+    /* text-shadow removed */
     transition: all 0.2s;
     pointer-events: auto;
 }

@@ -52,7 +52,10 @@ function updateLevel() {
         level = newLevel;
         document.getElementById('level').textContent = 'Level: ' + level;
         const color = BORDER_COLORS[(level - 1) % BORDER_COLORS.length];
-        document.getElementById('game-board').style.border = '4px solid ' + color;
+        const gameBoard = document.getElementById('game-board');
+        gameBoard.style.border = '4px solid ' + color;
+        gameBoard.classList.add('board-glow');
+        gameBoard.style.setProperty('--board-glow-color', color + 'cc');
     }
 }
 
@@ -460,7 +463,11 @@ function startGame() {
     gameOver = false;
     document.getElementById('score').textContent = 'Score: 0';
     document.getElementById('level').textContent = 'Level: 1';
-    document.getElementById('game-board').style.border = '4px solid ' + BORDER_COLORS[0];
+    const gameBoard = document.getElementById('game-board');
+    const borderColor = BORDER_COLORS[0];
+    gameBoard.style.border = '4px solid ' + borderColor;
+    gameBoard.classList.add('board-glow');
+    gameBoard.style.setProperty('--board-glow-color', borderColor + 'cc');
     resizeCanvas();
     drawBoard();
     drawNextPiecePreview();
