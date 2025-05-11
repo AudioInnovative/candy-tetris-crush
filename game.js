@@ -155,10 +155,11 @@ function rotate(shape) {
     return newShape;
 }
 
-function drawCell(r, c, color) {
+function drawCell(r, c, color, isGhost = false) {
     let x = c * CELL_SIZE, y = r * CELL_SIZE;
     ctx.save();
     ctx.shadowBlur = 0;
+    ctx.globalAlpha = isGhost ? 0.5 : 1.0;
     ctx.fillStyle = color;
     ctx.beginPath();
     ctx.moveTo(x + CELL_SIZE * 0.22, y);
@@ -212,9 +213,23 @@ function drawBoard(matchOverlay = null, matchColor = 'white') {
             }
         }
     }
-    // Draw current tetromino (hide during gravity/animation)
+    // Draw shadow/ghost piece (where the falling piece will land)
     if (current && !animatingDrop) {
-
+        // Calculate drop row for ghost
+        let ghostRow = current.row;
+        while (canMove(current, ghostRow - current.row + 1, 0)) {
+            ghostRow++;
+        }
+        // Draw the ghost piece below the current piece
+        for (let r = 0; r < current.shape.length; r++) {
+            for (let c = 0; c < current.shape[r].length; c++) {
+                if (current.shape[r][c]) {
+                    // Use same color but with alpha for ghost
+                    let ghostColor = current.shape[r][c] + '66'; // add alpha for transparency
+                    drawCell(ghostRow + r, current.col + c, ghostColor, true);
+                }
+            }
+        }
         // Draw current piece blocks
         for (let r = 0; r < current.shape.length; r++) {
             for (let c = 0; c < current.shape[r].length; c++) {
